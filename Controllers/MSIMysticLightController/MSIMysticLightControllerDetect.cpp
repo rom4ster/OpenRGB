@@ -16,7 +16,7 @@
 //
 // The MSI Mystic Light controller is disabled due to bricking risk
 // Uncomment this line to enable.  Do so at your own risk.
-// #define ENABLE_MYSTIC_LIGHT
+#define ENABLE_MYSTIC_LIGHT
 
 void DetectMSIMysticLightControllers(hid_device_info* info, const std::string& name)
 {
