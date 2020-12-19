@@ -181,8 +181,10 @@ HEADERS +=                                                                      
     Controllers/EspurnaController/RGBController_Espurna.h                                       \
     Controllers/EVGAGPUController/EVGAGPUv1Controller.h                                         \
     Controllers/EVGAGPUController/EVGAGPUv2Controller.h                                         \
+	Controllers/EVGAGPUController/EVGAGPUv3Controller.h                                         \
     Controllers/EVGAGPUController/RGBController_EVGAGPUv1.h                                     \
     Controllers/EVGAGPUController/RGBController_EVGAGPUv2.h                                     \
+	Controllers/EVGAGPUController/RGBController_EVGAGPUv3.h                                     \
     Controllers/GigabyteAorusCPUCoolerController/ATC800Controller.h                             \
     Controllers/GigabyteAorusCPUCoolerController/RGBController_AorusATC800.h                    \
     Controllers/GigabyteRGBFusion2DRAMController/GigabyteRGBFusion2DRAMController.h             \
@@ -374,9 +376,11 @@ SOURCES +=                                                                      
     Controllers/EspurnaController/RGBController_Espurna.cpp                                     \
     Controllers/EVGAGPUController/EVGAGPUv1Controller.cpp                                       \
     Controllers/EVGAGPUController/EVGAGPUv2Controller.cpp                                       \
+	Controllers/EVGAGPUController/EVGAGPUv3Controller.cpp                                       \
     Controllers/EVGAGPUController/EVGAGPUControllerDetect.cpp                                   \
     Controllers/EVGAGPUController/RGBController_EVGAGPUv1.cpp                                   \
     Controllers/EVGAGPUController/RGBController_EVGAGPUv2.cpp                                   \
+	Controllers/EVGAGPUController/RGBController_EVGAGPUv3.cpp                                   \
     Controllers/GigabyteAorusCPUCoolerController/ATC800Controller.cpp                           \
     Controllers/GigabyteAorusCPUCoolerController/GigabyteAorusCPUCoolerControllerDetect.cpp     \
     Controllers/GigabyteAorusCPUCoolerController/RGBController_AorusATC800.cpp                  \

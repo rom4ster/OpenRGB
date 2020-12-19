@@ -1,9 +1,11 @@
 #include "Detector.h"
 #include "EVGAGPUv1Controller.h"
 #include "EVGAGPUv2Controller.h"
+#include "EVGAGPUv3Controller.h"
 #include "RGBController.h"
 #include "RGBController_EVGAGPUv1.h"
 #include "RGBController_EVGAGPUv2.h"
+#include "RGBController_EVGAGPUv3.h"
 #include "i2c_smbus.h"
 #include "pci_ids.h"
 #include <vector>
@@ -14,6 +16,7 @@ enum
 {
     EVGA_RGB_V1,
     EVGA_RGB_V2,
+	EVGA_RGB_V3,
 };
 
 typedef struct
@@ -35,6 +38,7 @@ static const gpu_pci_device device_list[] =
     { NVIDIA_VEN,   NVIDIA_RTX2070_OC_DEV,  EVGA_SUB_VEN,   EVGA_RTX2070_XC_OC_SUB_DEV,     EVGA_RGB_V2,    "EVGA GeForce RTX 2070 XC OC"           },
     { NVIDIA_VEN,   NVIDIA_RTX2070S_DEV,    EVGA_SUB_VEN,   EVGA_RTX2070S_XC_ULTRA_SUB_DEV, EVGA_RGB_V2,    "EVGA GeForce RTX 2070 SUPER XC ULTRA"  },
     { NVIDIA_VEN,   NVIDIA_RTX2080_DEV,     EVGA_SUB_VEN,   EVGA_RTX2080_XC_GAMING_SUB_DEV, EVGA_RGB_V2,    "EVGA GeForce RTX 2080 XC GAMING"       },
+    { NVIDIA_VEN,   NVIDIA_RTX3090_DEV,     EVGA_SUB_VEN,   EVGA_RTX3090_FTW3_ULTRA_SUB_DEV, EVGA_RGB_V3,    "EVGA GeForce RTX 3090 FTW3 Ultra Gaming"},
 };
 
 /******************************************************************************************\
@@ -88,6 +92,18 @@ void DetectEVGAGPUControllers(std::vector<i2c_smbus_interface*>& busses, std::ve
                             new_rgbcontroller->name = device_list[dev_idx].name;
                             rgb_controllers.push_back(new_rgbcontroller);
                         }
+						break;
+						
+						case EVGA_RGB_V3:
+                        {
+                            EVGAGPUv3Controller*     new_controller;
+                            RGBController_EVGAGPUv3* new_rgbcontroller;
+
+                            new_controller          = new EVGAGPUv3Controller(busses[bus], 0x2D);
+                            new_rgbcontroller       = new RGBController_EVGAGPUv3(new_controller);
+                            new_rgbcontroller->name = device_list[dev_idx].name;
+                            rgb_controllers.push_back(new_rgbcontroller);
+                        }  
                         break;
                 }
             }

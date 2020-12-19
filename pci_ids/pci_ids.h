@@ -65,6 +65,7 @@
 #define EVGA_RTX2070_XC_OC_SUB_DEV              0x2173
 #define EVGA_RTX2070S_XC_ULTRA_SUB_DEV          0x3173
 #define EVGA_RTX2080_XC_GAMING_SUB_DEV          0x2182
+#define EVGA_RTX3090_FTW3_ULTRA_SUB_DEV         0x3987
 
 /*-----------------------------------------------------*\
 | Gigabyte (Aorus) Sub-Device IDs                       |
