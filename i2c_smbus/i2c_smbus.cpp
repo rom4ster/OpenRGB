@@ -8,6 +8,7 @@
 
 #include "i2c_smbus.h"
 #include <string.h>
+#include <errno.h>
 
 #ifdef WIN32
 #include <Windows.h>
