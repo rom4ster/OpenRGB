@@ -45,8 +45,13 @@ unsigned char EVGAGPUv3Controller::GetBlue()
     return(bus->i2c_smbus_read_byte_data(dev, EVGA_GPU_V3_REG_BLUE));
 }
 
-void useless(errno_t e) {
-    printf("%i", e);
+int lazy_write(evga_dev_id d, i2c_smbus_interface * b, u8 reg_start, u8 size, u8 * data) {
+    for (int i = 0; i < size; i ++) {
+        if (b->i2c_smbus_write_byte_data(d,reg_start+i,data[i]) < 0) {
+            return -1;
+        }
+    }
+    return 0;
 
 }
 void EVGAGPUv3Controller::SetColor(unsigned char red, unsigned char green, unsigned char blue)
@@ -70,8 +75,8 @@ void EVGAGPUv3Controller::SetColor(unsigned char red, unsigned char green, unsig
     bus->i2c_smbus_write_byte_data(dev, 0x0E,                               0xE0);*/
 
 
-    u8 PREDATA_REG = 0x52;
-    u8 predata [] {0x07,0x02,0x00,0x00,0x45,0x00,0x00,0x00};
+    u8 PREDATA_REG = 0xC0;
+    u8 predata [] {0x09,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0x3C,0x00};
     u8 data [5] {0x00};
     data [0] = 0x04;
     data [1] = 0xFF;
@@ -79,15 +84,12 @@ void EVGAGPUv3Controller::SetColor(unsigned char red, unsigned char green, unsig
     data [3] = green;
     data [4] = blue;
 
+    ret = lazy_write(dev,bus,PREDATA_REG,10,predata);
+    ret = lazy_write(dev,bus,EVGA_GPU_V3_REG_MODE,5,data);
 
-    ret = bus->i2c_smbus_write_block_data(dev,PREDATA_REG,8,predata);
-    if ( ret < 0) {
 
-        printf("%i",errno);
-        useless(errno);
 
-    }
-    ret = bus->i2c_smbus_write_block_data(dev,EVGA_GPU_V3_REG_MODE,5,data);
+
 }
 
 
