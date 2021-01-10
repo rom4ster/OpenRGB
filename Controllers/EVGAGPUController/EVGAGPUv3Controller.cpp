@@ -77,17 +77,17 @@ void EVGAGPUv3Controller::SetColor(unsigned char red, unsigned char green, unsig
 
     u8 PREDATA_REG = 0xB2;
     u8 POSTDATA_REG = 0xC0;
-    u8 predata [] {0x04,0xC6, 0xEB, 0xEA, 0x15};
+    u8 predata [] {0xC6, 0xEB, 0xEA, 0x15};
     //u8 postdata [] {0x09, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00};
     u8 data [4] {0x00};
-	data[0] = 0x04;
-    data [1] = 0xFF;
-    data [2] = red;
-    data [3] = green;
-    data [4] = blue;
+    //data[0] = 0x04;
+    data [0] = 0xFF;
+    data [1] = red;
+    data [2] = green;
+    data [3] = blue;
 
-    ret = bus->i2c_smbus_write_i2c_block_data(dev,PREDATA_REG,5,predata);
-    ret = bus->i2c_smbus_write_i2c_block_data(dev,EVGA_GPU_V3_REG_MODE,5,data);
+    ret = bus->i2c_smbus_write_i2c_block_data(dev,PREDATA_REG,4,predata);
+    ret = bus->i2c_smbus_write_i2c_block_data(dev,EVGA_GPU_V3_REG_MODE,4,data);
 
 
     //ret = lazy_write(dev,bus,PREDATA_REG,4,predata);
